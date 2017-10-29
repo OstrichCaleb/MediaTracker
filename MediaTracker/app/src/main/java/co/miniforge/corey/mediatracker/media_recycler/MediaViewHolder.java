@@ -7,13 +7,14 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import co.miniforge.corey.mediatracker.MediaDetailActivity;
 import co.miniforge.corey.mediatracker.MediaItemDetailActivity;
 import co.miniforge.corey.mediatracker.MyListActivity;
 import co.miniforge.corey.mediatracker.R;
 import co.miniforge.corey.mediatracker.model.MediaItem;
 
 /**
- * Created by corey on 10/15/17.
+ * Created by caleb on 10/28/17.
  */
 
 public class MediaViewHolder extends RecyclerView.ViewHolder {
@@ -38,15 +39,16 @@ public class MediaViewHolder extends RecyclerView.ViewHolder {
         mediaDescription = itemView.findViewById(R.id.mediaDescription);
     }
 
-    public void bindData(final MediaItem mediaItem){
+    public void bindData(final MediaItem mediaItem) {
         this.mediaName.setText(mediaItem.title);
         this.mediaDescription.setText(mediaItem.description);
 
         inflated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: Create a new activity with this object's data
-                //Hint: mediaItem.toJson().toString() && context.startActivity);
+                Intent intent = new Intent(view.getContext(), MediaDetailActivity.class);
+                intent.putExtra("mediaExtra", mediaItem.toJson().toString());
+                context.startActivity(intent);
             }
         });
     }
