@@ -3,7 +3,6 @@ package co.miniforge.corey.mediatracker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,8 +44,10 @@ public class MediaDetailActivity extends AppCompatActivity {
         if(getIntent().hasExtra(MyListActivity.mediaExtra)) {
             this.mediaExtra = getIntent().getStringExtra(MyListActivity.mediaExtra);
 
+            jsonObject = null;
+
             try {
-                jsonObject = new JSONObject(mediaExtra);
+                jsonObject = new JSONObject(this.mediaExtra);
             } catch (Exception e){
                 // Throw some exception
             }
@@ -67,7 +68,7 @@ public class MediaDetailActivity extends AppCompatActivity {
                 mediaItem.url = urlEntry.getText().toString();
 
                 Intent intent = new Intent(getApplicationContext(), MyListActivity.class);
-                intent.putExtra("mediaExtra", mediaItem.toJson().toString());
+                intent.putExtra(MyListActivity.mediaExtra, mediaItem.toJson().toString());
                 startActivity(intent);
             }
         });

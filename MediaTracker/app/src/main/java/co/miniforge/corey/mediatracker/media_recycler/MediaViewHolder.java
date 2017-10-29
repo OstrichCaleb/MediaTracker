@@ -44,10 +44,11 @@ public class MediaViewHolder extends RecyclerView.ViewHolder {
         this.mediaDescription.setText(mediaItem.description);
 
         inflated.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MediaDetailActivity.class);
-                intent.putExtra("mediaExtra", mediaItem.toJson().toString());
+                Intent intent = new Intent(context, MediaDetailActivity.class);
+                intent.putExtra(MyListActivity.mediaExtra, mediaItem.toJson().toString());
                 context.startActivity(intent);
             }
         });
