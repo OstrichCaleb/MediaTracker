@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="co.miniforge.corey.mediatracker.MediaDetailActivity">
+    tools:context="co.miniforge.corey.mediatracker.MediaDetailActivity"
+    tools:layout_editor_absoluteY="81dp">
 
     <EditText
         android:id="@+id/titleEntry"
@@ -22,32 +23,42 @@
         android:id="@+id/descriptionEntry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="47dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginTop="53dp"
         android:ems="10"
         android:hint="Description"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/titleEntry"
-        app:layout_constraintTop_toBottomOf="@+id/titleEntry" />
+        app:layout_constraintBottom_toTopOf="@+id/urlEntry"
+        app:layout_constraintEnd_toEndOf="@+id/titleEntry" />
 
     <EditText
         android:id="@+id/urlEntry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginBottom="202dp"
         android:ems="10"
         android:hint="URL"
         android:inputType="text"
-        app:layout_constraintStart_toStartOf="@+id/descriptionEntry"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionEntry" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/descriptionEntry" />
 
     <Button
         android:id="@+id/saveBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        android:layout_marginBottom="25dp"
         android:text="SAVE"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="33dp"
+        android:text="Would you Reccomend?"
+        app:layout_constraintEnd_toEndOf="@+id/urlEntry"
         app:layout_constraintTop_toBottomOf="@+id/urlEntry" />
 </android.support.constraint.ConstraintLayout>

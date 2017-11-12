@@ -109,9 +109,20 @@ public class MyListActivity extends AppCompatActivity {
         handler.post(runnable);
     }
 
-    public void updateMediaItems(List<MediaItem> mediaItems){
+    public void updateMediaItems(List<MediaItem> mediaItems) {
         this.mediaItems = mediaItems;
-        ((MediaRecyclerAdapter)media_list_recycler.getAdapter()).updateList(this.mediaItems);
+        ((MediaRecyclerAdapter) media_list_recycler.getAdapter()).updateList(this.mediaItems);
+    }
+
+    public void deleteMediaItem(MediaItem item){
+        for(int i = 0; i < mediaItems.size(); i++){
+            if(mediaItems.get(i).id.equals(item.id)){
+                mediaItems.remove(i); //POSSIBLY mediaItems.remove(i);
+                break;
+            }
+        }
+        storageUtil.saveMediaData(mediaItems);
+        updateMediaItems(storageUtil.getMediaDataList());
     }
 
     void setUpRecyclerView(){
