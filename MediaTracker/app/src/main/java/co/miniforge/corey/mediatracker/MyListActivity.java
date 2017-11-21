@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.PopupMenu;
 
 import org.json.JSONObject;
 
@@ -83,11 +84,10 @@ public class MyListActivity extends AppCompatActivity {
         add_media_item_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Create new empty media item
-                MediaItem item = new MediaItem();
-                mediaItems.add(item);
-                storageUtil.saveMediaData(mediaItems);
-                updateMediaItems(mediaItems);
+                PopupMenu menu = new PopupMenu(view.getContext(), view);
+                menu.inflate(R.menu.add_menu);
+                menu.setOnMenuItemClickListener(new AddPopUpMenuHelper((MyListActivity)view.getContext()));
+                menu.show();
             }
         });
 
@@ -131,5 +131,11 @@ public class MyListActivity extends AppCompatActivity {
 
         LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext());
         media_list_recycler.setLayoutManager(manager);
+    }
+
+    public void addMediaItem(MediaItem item) {
+        this.mediaItems.add(item);
+        storageUtil.saveMediaData(mediaItems);
+        updateMediaItems(mediaItems);
     }
 }

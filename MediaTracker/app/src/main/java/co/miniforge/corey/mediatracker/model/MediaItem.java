@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.security.MessageDigest;
 
+import co.miniforge.corey.mediatracker.R;
 import co.miniforge.corey.mediatracker.media_store.Md5IdHelper;
 
 /**
@@ -35,6 +36,50 @@ public class MediaItem {
         }
     }
 
+    public MediaItem(MediaItemType type){
+        try{
+            switch (type) {
+                case Movie:
+                    //Generate id based on the object instance (should work :D)
+                    this.id = Md5IdHelper.idForObject(this);
+                    this.title = "Movie";
+                    this.description = "movieDescription";
+                    this.url = "movieUrl";
+                    this.type = type;
+                    break;
+                case TV:
+                    //Generate id based on the object instance (should work :D)
+                    this.id = Md5IdHelper.idForObject(this);
+                    this.title = "TV";
+                    this.description = "tVDescription";
+                    this.url = "tVUrl";
+                    this.type = type;
+                    break;
+                case YouTube:
+                    //Generate id based on the object instance (should work :D)
+                    this.id = Md5IdHelper.idForObject(this);
+                    this.title = "YouTube";
+                    this.description = "youTubeDescription";
+                    this.url = "youTubeUrl";
+                    this.type = type;
+                    break;
+                default:
+                    //Generate id based on the object instance (should work :D)
+                    this.id = Md5IdHelper.idForObject(this);
+                    this.title = "defaultTitle";
+                    this.description = "defaultDescription";
+                    this.url = "defaultUrl";
+                    this.type = type;
+                    break;
+            }
+
+
+
+        } catch (Exception e){
+            Log.e("toJSONError", String.format("There was an error: %s", e.getMessage()));
+        }
+    }
+
     public MediaItem(){
         this.id = Md5IdHelper.idForObject(this);
         this.title = "defaultTitle";
@@ -48,6 +93,8 @@ public class MediaItem {
                 return  MediaItemType.TV;
             case "Movie":
                 return  MediaItemType.Movie;
+            case "YouTube":
+                return MediaItemType.YouTube;
             default:
                 return MediaItemType.Generic;
         }
@@ -59,6 +106,8 @@ public class MediaItem {
                 return "Movie";
             case TV:
                 return "TV";
+            case YouTube:
+                return "YouTube";
             default:
                 return "Generic";
         }

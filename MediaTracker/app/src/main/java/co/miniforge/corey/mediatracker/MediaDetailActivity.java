@@ -1,6 +1,8 @@
 package co.miniforge.corey.mediatracker;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -63,6 +65,18 @@ public class MediaDetailActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                promptConfirmation();
+            }
+        });
+    }
+
+    public void promptConfirmation(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Save Changes").setMessage("Are you sure you want to save these changes?");
+
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // Put the start activity with intent code here
                 mediaItem.title = titleEntry.getText().toString();
                 mediaItem.description = descriptionEntry.getText().toString();
                 mediaItem.url = urlEntry.getText().toString();
@@ -72,5 +86,14 @@ public class MediaDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // Do nothing, unless you want this button to go back to
+                // ListActivity without putting an intent extra
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
